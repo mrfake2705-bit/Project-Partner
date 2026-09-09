@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HackPartner — Find, Hire & Track Hackathon & Project Teammates</title>
+  <meta name="description" content="The premier collaboration marketplace for university students and developers to find project partners for hackathons, showcase live project demos, and track post-hire progress." />
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/components.css" />
+</head>
+<body>
+
+  <!-- NAVIGATION BAR -->
+  <header class="navbar">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <div class="brand-logo" id="brand-logo-btn" data-tab="find-partners">
+        <div class="brand-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <span class="brand-text">HackPartner</span>
+        <span class="brand-pill">2026</span>
+      </div>
+
+      <!-- Center Navigation Links -->
+      <nav class="nav-links">
+        <button class="nav-link active" data-tab="find-partners" id="nav-find-partners">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Find Partners
+        </button>
+        <button class="nav-link" data-tab="explore-projects" id="nav-explore-projects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+          Projects & Demos
+        </button>
+        <button class="nav-link" data-tab="post-project" id="nav-post-project">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Post Requirement
+        </button>
+        <button class="nav-link" data-tab="progress-tracker" id="nav-progress-tracker">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 9h6"/><path d="M15 15h6"/></svg>
+          Progress Workspace
+        </button>
+        <button class="nav-link" data-tab="my-profile" id="nav-my-profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          My Profile
+        </button>
+      </nav>
+
+      <!-- Right Action CTAs (Dynamic Auth State) -->
+      <div class="nav-right-actions" id="nav-right-actions">
+        <!-- Logged In State Elements -->
+        <div class="nav-auth-logged-in" id="nav-auth-logged-in">
+          <button class="btn btn-primary btn-sm" id="nav-post-cta">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Hire Partner
+          </button>
+          <div class="nav-user-pill" id="nav-user-pill" data-tab="my-profile" title="View Profile">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=120" alt="Current User Profile" class="nav-user-avatar" id="nav-avatar-btn" />
+            <span class="nav-user-name" id="nav-user-name">Devansh</span>
+          </div>
+          <button class="btn-icon-nav" id="nav-logout-btn" title="Sign Out" aria-label="Sign Out">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          </button>
+        </div>
+
+        <!-- Logged Out State Elements -->
+        <div class="nav-auth-logged-out" id="nav-auth-logged-out" style="display: none;">
+          <button class="btn btn-ghost btn-sm" id="nav-signin-btn">
+            Sign In
+          </button>
+          <button class="btn btn-primary btn-sm" id="nav-register-btn">
+            Create Account
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION (Visible across discovery tabs) -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-pill-announcement">
+        <span class="hero-pulse"></span>
+        <span>Smart India Hackathon, ETHGlobal & MLH 2026 Season Live</span>
+      </div>
+      <h1 class="hero-title">Find Your Dream Hackathon Teammates & Build Winning Projects</h1>
+      <p class="hero-subtitle">
+        Connect with vetted developers, ML researchers, and designers. Showcase live interactive prototypes of your project demo and track sprint progress post-hire.
+      </p>
+
+      <div class="hero-cta-group">
+        <button class="btn btn-primary btn-lg" id="hero-explore-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Explore Partners
+        </button>
+        <button class="btn btn-secondary btn-lg" id="hero-post-btn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Post Project & Hire
+        </button>
+      </div>
+
+      <!-- Live Stats Strip -->
+      <div class="hero-stats-strip">
+        <div class="stat-item">
+          <span class="stat-val" id="stat-partners-count">1,245+</span>
+          <span class="stat-desc">Vetted Hackers</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-projects-count">380+</span>
+          <span class="stat-desc">Active Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-hired-count">88 Teams Formed</span>
+          <span class="stat-desc">Sprint Progress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="container">
+
+    <!-- ======================================================================
+         TAB 1: FIND PROJECT PARTNERS
+         ====================================================================== -->
+    <section class="tab-view active" id="view-find-partners">
+      <div class="view-header">
+        <div class="view-title-row">
+          <div>
+            <h2 class="view-heading">Candidate Marketplace</h2>
+            <p class="view-subtitle">Browse student developers ready to team up for your next competition or capstone.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters Toolbar -->
+      <div class="filters-bar">
+        <div class="filter-left-group">
+          <div class="search-input-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-candidate-input" placeholder="Search by name, role, skill (e.g. PyTorch, Flutter, React)..." />
+          </div>
+
+          <select id="filter-candidate-domain" class="filter-select">
+            <option value="All Domains">All Domains</option>
+          </select>
+        </div>
+
+        <div class="filter-right-group">
+          <select id="filter-candidate-experience" class="filter-select">
+            <option value="all">All Experience Levels</option>
+            <option value="winners">🏆 Hackathon Winners Only</option>
+            <option value="available">🟢 Available Immediately</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Popular Skill Quick Filter Pills -->
+      <div class="quick-chips-row" id="candidate-popular-skills"></div>
+
+      <!-- Candidates Cards Grid -->
+      <div class="cards-grid" id="candidates-grid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 2: EXPLORE PROJECTS & DEMO SHOWCASE
+         ====================================================================== -->
+    <section class="tab-view" id="view-explore-projects">
+      <div class="view-header">
+        <div class="view-title-row">
+          <div>
+            <h2 class="view-heading">Hackathon Projects & Interactive Demos</h2>
+            <p class="view-subtitle">Discover teams recruiting for upcoming hackathons. Inspect prototypes and watch video demos.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project Filters Toolbar -->
+      <div class="filters-bar">
+        <div class="filter-left-group">
+          <div class="search-input-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input type="text" id="search-projects-input" placeholder="Search projects by title, domain, or target hackathon..." />
+          </div>
+
+          <select id="filter-project-domain" class="filter-select">
+            <option value="All Domains">All Domains</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Projects Grid -->
+      <div class="cards-grid" id="projects-grid">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 3: POST PROJECT REQUIREMENT & HIRE
+         ====================================================================== -->
+    <section class="tab-view" id="view-post-project">
+      <div class="post-project-layout">
+        <div class="view-header">
+          <h2 class="view-heading">Post Project Requirement & Invite Partners</h2>
+          <p class="view-subtitle">Specify what your team is building, upload demo materials, and list open partner roles.</p>
+        </div>
+
+        <form id="post-project-form" class="modal-form">
+          <div class="form-group">
+            <label class="form-label" for="proj-form-title">Project Name *</label>
+            <input type="text" id="proj-form-title" placeholder="e.g. NeuroVision - Glaucoma Early Detection" required />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="proj-form-tagline">Catchy One-Line Tagline *</label>
+            <input type="text" id="proj-form-tagline" placeholder="e.g. Real-time edge inference app for optic nerve cup-to-disc ratio analysis." required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="proj-form-event">Target Hackathon or Event *</label>
+              <input type="text" id="proj-form-event" placeholder="e.g. Smart India Hackathon 2026, HackMIT" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="proj-form-domain">Primary Domain *</label>
+              <select id="proj-form-domain" required>
+                <option value="AI & Machine Learning">AI & Machine Learning</option>
+                <option value="Web Development">Web Development</option>
+                <option value="Mobile Apps">Mobile Apps</option>
+                <option value="Web3 & Blockchain">Web3 & Blockchain</option>
+                <option value="Cloud & DevOps">Cloud & DevOps</option>
+                <option value="Cybersecurity">Cybersecurity</option>
+                <option value="UI/UX Design">UI/UX Design</option>
+                <option value="IoT & Robotics">IoT & Robotics</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="proj-form-roles">Open Partner Roles Needed (comma-separated) *</label>
+              <input type="text" id="proj-form-roles" placeholder="e.g. Computer Vision Researcher, React Frontend Dev" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="proj-form-skills">Required Technical Skills (comma-separated) *</label>
+              <input type="text" id="proj-form-skills" placeholder="e.g. PyTorch, OpenCV, React, FastAPI" required />
+            </div>
+          </div>
+
+          <!-- Project Demo & Showcase Section -->
+          <div class="form-group mt-2">
+            <label class="form-label">
+              <span class="badge badge-accent mr-2">Featured Showcase</span>
+              Project Demo & Proof of Concept Details
+            </label>
+            <textarea id="proj-form-demo-summary" rows="3" placeholder="Describe the current demo or prototype progress (e.g. Dataset trained, ViT model tested, FastAPI backend endpoints working)."></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="proj-form-video-url">Pitch / Demo Video URL (optional)</label>
+              <input type="url" id="proj-form-video-url" placeholder="https://youtube.com/watch?v=... or Loom" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="proj-form-github">GitHub Repository (optional)</label>
+              <input type="url" id="proj-form-github" placeholder="https://github.com/username/project" />
+            </div>
+          </div>
+
+          <div class="form-group mt-4">
+            <button type="submit" class="btn btn-primary btn-lg w-100">
+              Publish Project & Open For Hiring
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 4: POST-HIRE PROGRESS TRACKER (WORKSPACE)
+         ====================================================================== -->
+    <section class="tab-view" id="view-progress-tracker">
+      <div id="tracker-container">
+        <!-- Rendered dynamically by js/tracker.js -->
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         TAB 5: USER PROFILE & SETTINGS
+         ====================================================================== -->
+    <section class="tab-view" id="view-my-profile">
+      <div class="post-project-layout">
+        <div class="view-header">
+          <h2 class="view-heading">Your Developer Profile</h2>
+          <p class="view-subtitle">Manage your public information, verified technical skills, and active hackathon teams.</p>
+        </div>
+
+        <!-- Profile Header Card with Interactive Avatar -->
+        <div class="profile-header-card glass-panel mb-4">
+          <div class="profile-avatar-edit-container">
+            <div class="profile-avatar-wrapper" id="profile-avatar-clickable" title="Click to change profile picture">
+              <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=160" alt="Avatar" class="profile-main-avatar" id="user-profile-avatar" />
+              <div class="avatar-edit-overlay">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+                <span>Change Photo</span>
+              </div>
+            </div>
+            <button type="button" class="btn btn-outline btn-xs mt-2" id="btn-open-avatar-modal">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+              Edit Photo
+            </button>
+          </div>
+
+          <div class="profile-info-block">
+            <div class="profile-title-badge-row">
+              <h3 id="user-profile-name">Devansh Mehta</h3>
+              <span class="badge badge-accent" id="user-profile-role-badge">Project Lead</span>
+            </div>
+            <span class="text-sm text-muted" id="user-profile-uni">BITS Pilani • Senior Year</span>
+            <p class="text-sm text-secondary mt-1" id="user-profile-bio">Hackathon enthusiast & Project Lead.</p>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <span class="text-xs text-muted font-bold">YOUR CURRENT SKILLS:</span>
+          <div class="candidate-skills mt-1" id="user-profile-skills"></div>
+        </div>
+
+        <form id="edit-profile-form" class="modal-form">
+          <h4 class="form-label">Edit Profile Information</h4>
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="profile-form-name">Full Name</label>
+              <input type="text" id="profile-form-name" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="profile-form-uni">University & Graduation Year</label>
+              <input type="text" id="profile-form-uni" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="profile-form-bio">Bio & Track Record</label>
+            <textarea id="profile-form-bio" rows="3" required></textarea>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label class="form-label" for="profile-form-skills">Skills (comma-separated)</label>
+              <input type="text" id="profile-form-skills" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="profile-form-avatar">Profile Picture URL (or click photo above)</label>
+              <input type="url" id="profile-form-avatar" placeholder="https://images.unsplash.com/..." />
+            </div>
+          </div>
+
+          <div class="form-group mt-2">
+            <button type="submit" class="btn btn-primary">Save Profile Updates</button>
+          </div>
+        </form>
+      </div>
+    <!-- ======================================================================
+         TAB 6: DEDICATED LOGIN & SIGN UP PAGE VIEW
+         ====================================================================== -->
+    <section class="tab-view" id="view-auth">
+      <div class="auth-page-wrapper">
+        <div class="auth-page-hero">
+          <div class="brand-badge mb-2">
+            <div class="brand-icon small">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                <polyline points="2 17 12 22 22 17"></polyline>
+                <polyline points="2 12 12 17 22 12"></polyline>
+              </svg>
+            </div>
+            <span>HackPartner Portal</span>
+          </div>
+          <h2 class="auth-page-title">Build Your Dream Hackathon Team</h2>
+          <p class="auth-page-subtitle">
+            Join thousands of student developers, AI researchers, and designers collaborating on winning hackathon projects.
+          </p>
+
+          <!-- Feature Highlights Checklist -->
+          <div class="auth-benefits-list">
+            <div class="benefit-item">
+              <div class="benefit-icon">✨</div>
+              <div>
+                <strong>Find & Hire Verified Partners</strong>
+                <p>Filter candidates by ML, Web3, Fullstack domains and hackathon win records.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🧪</div>
+              <div>
+                <strong>Interactive Project Demos</strong>
+                <p>Test drive working live prototypes, code architectures, and video pitches.</p>
+              </div>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">📊</div>
+              <div>
+                <strong>Post-Hire Kanban Workspace</strong>
+                <p>Track sprints with SVG circular progress gauges and milestone checklists.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="auth-page-card-container">
+          <div class="auth-card glass-panel" id="auth-main-card">
+            <!-- 1-Click Quick Demo Switcher -->
+            <div class="auth-quick-demo-section">
+              <div class="quick-demo-label">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                <span>⚡ 1-Click Test Drive (Demo Personas):</span>
+              </div>
+              <div class="quick-demo-buttons">
+                <button type="button" class="btn-quick-demo" data-user-id="user-1" title="Devansh Mehta - Project Owner">
+                  <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=60" alt="Lead" class="demo-avatar" />
+                  <div class="demo-info">
+                    <span class="demo-name">Devansh</span>
+                    <span class="demo-badge lead">Project Lead</span>
+                  </div>
+                </button>
+                <button type="button" class="btn-quick-demo" data-user-id="user-2" title="Aarav Sharma - PyTorch Candidate">
+                  <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=60" alt="ML" class="demo-avatar" />
+                  <div class="demo-info">
+                    <span class="demo-name">Aarav</span>
+                    <span class="demo-badge partner">AI/ML Partner</span>
+                  </div>
+                </button>
+                <button type="button" class="btn-quick-demo" data-user-id="user-3" title="Elena Rostova - Web3 Candidate">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60" alt="Web3" class="demo-avatar" />
+                  <div class="demo-info">
+                    <span class="demo-name">Elena</span>
+                    <span class="demo-badge partner">Web3 Partner</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Tab Buttons: Sign In / Create Account -->
+            <div class="auth-tabs-nav">
+              <button type="button" class="auth-tab-btn active" data-auth-target="signin" id="tab-btn-signin">
+                Sign In
+              </button>
+              <button type="button" class="auth-tab-btn" data-auth-target="signup" id="tab-btn-signup">
+                Create Account
+              </button>
+            </div>
+
+            <!-- SIGN IN FORM -->
+            <form id="auth-signin-form" class="auth-form-body active">
+              <div class="form-group">
+                <label class="form-label" for="signin-email">Email Address</label>
+                <div class="input-with-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                  <input type="email" id="signin-email" value="devansh@hackpartner.dev" placeholder="devansh@hackpartner.dev" required autocomplete="email" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="form-label-row">
+                  <label class="form-label" for="signin-password">Password</label>
+                  <span class="form-hint-text">Demo: <code>password123</code></span>
+                </div>
+                <div class="input-with-icon">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                  <input type="password" id="signin-password" value="password123" placeholder="••••••••" required autocomplete="current-password" />
+                  <button type="button" class="toggle-password-btn" data-target="signin-password" aria-label="Toggle password visibility">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-options-row">
+                <label class="checkbox-label">
+                  <input type="checkbox" id="signin-remember" checked />
+                  <span>Remember this session</span>
+                </label>
+                <a href="#" class="form-hint-link" id="btn-forgot-pw-link">Need help?</a>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-2" id="btn-submit-signin">
+                <span>Sign In to Platform</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+
+              <p class="auth-switch-prompt">
+                New to HackPartner? <button type="button" class="link-btn" id="prompt-switch-to-signup">Create an account</button>
+              </p>
+            </form>
+
+            <!-- SIGN UP FORM -->
+            <form id="auth-signup-form" class="auth-form-body">
+              <div class="form-group">
+                <label class="form-label">Select Your Primary Goal:</label>
+                <div class="role-selector-grid">
+                  <label class="role-card selected" id="role-choice-lead">
+                    <input type="radio" name="signup-role-type" value="lead" checked />
+                    <div class="role-card-inner">
+                      <span class="role-card-icon">🚀</span>
+                      <span class="role-card-title">Project Lead</span>
+                      <span class="role-card-desc">I have a project idea & want to hire teammates</span>
+                    </div>
+                  </label>
+                  <label class="role-card" id="role-choice-partner">
+                    <input type="radio" name="signup-role-type" value="partner" />
+                    <div class="role-card-inner">
+                      <span class="role-card-icon">⚡</span>
+                      <span class="role-card-title">Join as Partner</span>
+                      <span class="role-card-desc">I want to join hackathons & get hired for my skills</span>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              
+
+              <button type="submit" class="btn btn-primary btn-lg w-100 mt-2" id="btn-submit-signup">
+                <span>Create Account & Start Collaborating</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </button>
+
+              <p class="auth-switch-prompt">
+                Already registered? <button type="button" class="link-btn" id="prompt-switch-to-signin">Sign In</button>
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================================
+       MODAL 1: INTERACTIVE PROJECT DEMO SHOWCASE
+       ====================================================================== -->
+  <div class="modal-backdrop" id="demo-modal">
+    <div id="demo-modal-container">
+      <!-- Injected by js/demoViewer.js -->
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 2: HIRE / INVITE PARTNER MODAL
+       ====================================================================== -->
+  <div class="modal-backdrop" id="hire-modal">
+    <div class="standard-modal-dialog">
+      <div class="modal-header-clean">
+        <h3 class="modal-title">Hire Partner for Project</h3>
+        <button class="btn-close btn-modal-close">&times;</button>
+      </div>
+
+      <form id="hire-partner-form" class="modal-form">
+        <!-- Selected Candidate Preview -->
+        <input type="hidden" id="hire-candidate-id" />
+        <div class="candidate-preview-box">
+          <img src="" id="hire-modal-avatar" alt="Avatar" class="candidate-preview-avatar" />
+          <div>
+            <strong id="hire-modal-name">Candidate Name</strong>
+            <span class="text-xs text-muted block" id="hire-modal-title">Title</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="hire-project-select">Select Your Project *</label>
+          <select id="hire-project-select" required>
+            <!-- Populated dynamically -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="hire-role-title">Role Offered *</label>
+          <input type="text" id="hire-role-title" placeholder="e.g. FastAPI Backend & Inference Dev" required />
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="hire-invite-message">Personalized Invitation Note</label>
+          <textarea id="hire-invite-message" rows="3" placeholder="Hi! We love your hackathon track record and want you to lead the backend inference for our Smart India Hackathon submission..."></textarea>
+        </div>
+
+        <div class="form-group mt-2">
+          <button type="submit" class="btn btn-primary btn-lg w-100">
+            Confirm & Hire Partner to Project Team
+          </button>
+          <span class="text-xs text-muted text-center mt-2">
+            Hiring automatically unlocks the Sprint Kanban Workspace and links the partner's tasks.
+          </span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 3: ADD TASK TO WORKSPACE KANBAN
+       ====================================================================== -->
+  <div class="modal-backdrop" id="add-task-modal">
+    <div class="standard-modal-dialog">
+      <div class="modal-header-clean">
+        <h3 class="modal-title">Add Sprint Deliverable</h3>
+        <button class="btn-close btn-modal-close">&times;</button>
+      </div>
+
+      <form id="add-task-form" class="modal-form">
+        <input type="hidden" id="add-task-project-id" />
+
+        <div class="form-group">
+          <label class="form-label" for="task-title-input">Task Title *</label>
+          <input type="text" id="task-title-input" placeholder="e.g. Integrate PyTorch ONNX model with FastAPI endpoint" required />
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="task-status-select">Column Status</label>
+            <select id="task-status-select">
+              <option value="backlog">Backlog</option>
+              <option value="in-progress" selected>In Progress</option>
+              <option value="review">Under Review / QA</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="task-priority-select">Priority Level</label>
+            <select id="task-priority-select">
+              <option value="high">High Priority</option>
+              <option value="medium" selected>Medium Priority</option>
+              <option value="low">Low Priority</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="task-assignee-select">Assignee</label>
+            <select id="task-assignee-select">
+              <!-- Populated with Owner & Hired Partners -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="task-due-date-input">Target Due Date</label>
+            <input type="text" id="task-due-date-input" placeholder="e.g. Sept 24 or 3 Days" />
+          </div>
+        </div>
+
+        <div class="form-group mt-2">
+          <button type="submit" class="btn btn-primary btn-lg w-100">
+            Create Task
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 4: CANDIDATE PROFILE DETAILS
+       ====================================================================== -->
+  <div class="modal-backdrop" id="candidate-profile-modal">
+    <div class="candidate-detail-dialog">
+      <div id="candidate-modal-content">
+        <!-- Injected by js/app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 5: AUTHENTICATION (LOGIN & SIGN UP) MODAL POPUP
+       ====================================================================== -->
+  <div class="modal-backdrop" id="auth-modal">
+    <div class="auth-modal-dialog glass-panel">
+      <div class="auth-modal-header">
+        <div class="brand-badge">
+          <div class="brand-icon small">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+              <polyline points="2 17 12 22 22 17"></polyline>
+              <polyline points="2 12 12 17 22 12"></polyline>
+            </svg>
+          </div>
+          <span>HackPartner Auth</span>
+        </div>
+        <button class="btn-close" id="auth-modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <!-- Quick 1-Click Demo Logins for Modal -->
+      <div class="auth-quick-demo-section">
+        <div class="quick-demo-label">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          <span>⚡ 1-Click Test Drive (Demo Personas):</span>
+        </div>
+        <div class="quick-demo-buttons">
+          <button type="button" class="btn-quick-demo" data-user-id="user-1" title="Devansh Mehta - Project Owner">
+            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=60" alt="Lead" class="demo-avatar" />
+            <div class="demo-info">
+              <span class="demo-name">Devansh</span>
+              <span class="demo-badge lead">Project Lead</span>
+            </div>
+          </button>
+          <button type="button" class="btn-quick-demo" data-user-id="user-2" title="Aarav Sharma - PyTorch Candidate">
+            <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=60" alt="ML" class="demo-avatar" />
+            <div class="demo-info">
+              <span class="demo-name">Aarav</span>
+              <span class="demo-badge partner">AI/ML Partner</span>
+            </div>
+          </button>
+          <button type="button" class="btn-quick-demo" data-user-id="user-3" title="Elena Rostova - Web3 Candidate">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60" alt="Web3" class="demo-avatar" />
+            <div class="demo-info">
+              <span class="demo-name">Elena</span>
+              <span class="demo-badge partner">Web3 Partner</span>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      <div class="auth-tabs-nav">
+        <button type="button" class="auth-tab-btn active" data-modal-tab="signin" id="modal-tab-signin">
+          Sign In
+        </button>
+        <button type="button" class="auth-tab-btn" data-modal-tab="signup" id="modal-tab-signup">
+          Create Account
+        </button>
+      </div>
+
+      <!-- MODAL SIGN IN FORM -->
+      <form id="modal-signin-form" class="auth-form-body active">
+        <div class="form-group">
+          <label class="form-label" for="modal-signin-email">Email Address</label>
+          <div class="input-with-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <input type="email" id="modal-signin-email" value="devansh@hackpartner.dev" placeholder="devansh@hackpartner.dev" required autocomplete="email" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="form-label-row">
+            <label class="form-label" for="modal-signin-password">Password</label>
+            <span class="form-hint-text">Demo: <code>password123</code></span>
+          </div>
+          <div class="input-with-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <input type="password" id="modal-signin-password" value="password123" placeholder="••••••••" required autocomplete="current-password" />
+            <button type="button" class="toggle-password-btn" data-target="modal-signin-password" aria-label="Toggle password visibility">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-options-row">
+          <label class="checkbox-label">
+            <input type="checkbox" id="modal-signin-remember" checked />
+            <span>Remember this session</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg w-100 mt-2" id="btn-modal-submit-signin">
+          <span>Sign In to Platform</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <p class="auth-switch-prompt">
+          New to HackPartner? <button type="button" class="link-btn" id="modal-prompt-switch-to-signup">Create an account</button>
+        </p>
+      </form>
+
+      <!-- MODAL SIGN UP FORM -->
+      <form id="modal-signup-form" class="auth-form-body">
+        <div class="form-group">
+          <label class="form-label">Select Your Primary Goal:</label>
+          <div class="role-selector-grid">
+            <label class="role-card selected" id="modal-role-choice-lead">
+              <input type="radio" name="modal-signup-role-type" value="lead" checked />
+              <div class="role-card-inner">
+                <span class="role-card-icon">🚀</span>
+                <span class="role-card-title">Project Lead</span>
+                <span class="role-card-desc">I want to hire partners for my project</span>
+              </div>
+            </label>
+            <label class="role-card" id="modal-role-choice-partner">
+              <input type="radio" name="modal-signup-role-type" value="partner" />
+              <div class="role-card-inner">
+                <span class="role-card-icon">⚡</span>
+                <span class="role-card-title">Join as Partner</span>
+                <span class="role-card-desc">I want to join teams & showcase skills</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+       
+        
+        
+
+        
+
+        <button type="submit" class="btn btn-primary btn-lg w-100 mt-2" id="btn-modal-submit-signup">
+          <span>Create Account</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+
+        <p class="auth-switch-prompt">
+          Already have an account? <button type="button" class="link-btn" id="modal-prompt-switch-to-signin">Sign In</button>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL 6: EDIT PROFILE PICTURE MODAL
+       ====================================================================== -->
+  <div class="modal-backdrop" id="edit-avatar-modal">
+    <div class="avatar-modal-dialog glass-panel">
+      <div class="modal-header-clean">
+        <h3 class="modal-title">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: -3px; margin-right: 6px;">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+            <circle cx="12" cy="13" r="4"/>
+          </svg>
+          Update Profile Picture
+        </h3>
+        <button class="btn-close" id="edit-avatar-modal-close-btn" aria-label="Close modal">&times;</button>
+      </div>
+
+      <div class="avatar-modal-content">
+        <!-- Live Preview Target -->
+        <div class="avatar-live-preview-section">
+          <div class="avatar-preview-ring">
+            <img src="" id="avatar-modal-preview" alt="Preview Avatar" class="avatar-preview-lg" />
+          </div>
+          <div class="avatar-preview-meta">
+            <span class="text-xs text-muted font-bold">Active Preview</span>
+            <span class="text-xs text-cyan">Upload a local file, choose a preset, or paste a link</span>
+          </div>
+        </div>
+
+        <!-- Tab controls for picture update -->
+        <div class="avatar-tabs-nav">
+          <button type="button" class="avatar-tab-btn active" data-tab-panel="panel-upload" id="tab-avatar-upload">
+            📁 Upload File
+          </button>
+          <button type="button" class="avatar-tab-btn" data-tab-panel="panel-presets" id="tab-avatar-presets">
+            ⚡ Cyber Presets
+          </button>
+          <button type="button" class="avatar-tab-btn" data-tab-panel="panel-url" id="tab-avatar-url">
+            🔗 Image URL
+          </button>
+        </div>
+
+        <!-- PANEL 1: Upload File -->
+        <div class="avatar-panel active" id="panel-upload">
+          <div class="avatar-dropzone" id="avatar-dropzone">
+            <input type="file" id="avatar-file-input" accept="image/png, image/jpeg, image/webp, image/gif" style="display: none;" />
+            <div class="dropzone-icon">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            </div>
+            <p class="dropzone-title">Click to browse or drag & drop an image</p>
+            <span class="dropzone-subtitle">Supports PNG, JPG, WebP, GIF (Max 5MB)</span>
+            <button type="button" class="btn btn-primary btn-sm mt-3" id="btn-browse-photo">
+              Choose from Computer
+            </button>
+          </div>
+        </div>
+
+        <!-- PANEL 2: Presets Grid -->
+        <div class="avatar-panel" id="panel-presets">
+          <p class="text-xs text-muted mb-2">Click any developer preset avatar to select:</p>
+          <div class="avatar-presets-grid" id="avatar-presets-container">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <!-- PANEL 3: Web URL -->
+        <div class="avatar-panel" id="panel-url">
+          <div class="form-group">
+            <label class="form-label" for="avatar-input-url">Paste Image URL</label>
+            <div class="input-with-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <input type="url" id="avatar-input-url" placeholder="https://images.unsplash.com/..." />
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-apply-url-preview">
+            Preview Link
+          </button>
+        </div>
+
+        <!-- Modal Footer Actions -->
+        <div class="avatar-modal-footer mt-4">
+          <button type="button" class="btn btn-secondary" id="btn-cancel-avatar-edit">Cancel</button>
+          <button type="button" class="btn btn-primary" id="btn-save-avatar">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+            Save Profile Picture
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- JavaScript: Universal bundle works both via direct file:// double-click AND via web server -->
+  <script src="js/bundle.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
